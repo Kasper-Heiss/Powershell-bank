@@ -92,7 +92,7 @@ Function RestoreChromeFavoriteFiles() {
         Remove-Item  $TempFileName
     }
 
-    $Data = $Settings.Root.ChromeFavorites.ChromeFavorites.InnerText
+    $Data = $Settings.Root.ChromeFavorites.Favorites.InnerText
     write-host "DATA START"
     write-host $Data
     write-host "DATA END"
