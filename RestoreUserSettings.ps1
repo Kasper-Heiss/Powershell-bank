@@ -8,7 +8,7 @@ Param(
     [switch]$OfficeLanguageSettings,
     [switch]$WindowsSettings
 )
-
+##Start of test with GIT
 [System.Xml.XmlDocument]$Settings = New-Object System.Xml.XmlDocument
 
 Function ReadSettings() {
