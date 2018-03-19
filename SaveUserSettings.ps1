@@ -94,7 +94,7 @@ Function SaveChromeFavoriteFiles() {
 
     Write-Host "Gather ChromeFavorites ... " -ForegroundColor Green -NoNewline
 
-    $FavNode = AddElement -Name "Favorites" -rootNode $Root
+    $FavNode = AddElement -Name "ChromeFavorites" -rootNode $Root
 
     Add-Type -Assembly "System.IO.Compression.FileSystem"
 
@@ -114,7 +114,7 @@ Function SaveChromeFavoriteFiles() {
 
     $contentEncoded = [System.Convert]::ToBase64String($content)
 
-    AddCData -Name "ChromeFavorites" -Value $contentEncoded -rootNode $FavNode 
+    AddCData -Name "Favorites" -Value $contentEncoded -rootNode $FavNode 
 
     Write-Host "Done" -ForegroundColor Green
 }
