@@ -27,9 +27,6 @@ Function ReadSettings() {
             $Path = "\\danfoss.net\files\Common\Settings\$($env:USERNAME)\"
         }
     }
-    
-    
-
     If (!$userName) {
         $userName = $env:username
     }
@@ -93,24 +90,13 @@ Function RestoreChromeFavoriteFiles() {
     }
 
     $Data = $Settings.Root.ChromeFavorites.Favorites.InnerText
-    write-host "DATA START"
-    write-host $Data
-    write-host "DATA END"
     $Bytes = [System.Convert]::FromBase64String($data)
     [System.IO.File]::WriteAllBytes($TempFileName, $Bytes)
 
-    $TempDirName = "$([System.IO.Path]::GetTempPath())$([System.IO.Path]::GetRandomFileName())"
-
-    #[System.IO.Compression.ZipFile]::ExtractToDirectory($TempFileName, $TempDirName)
-
-    
     # Copy items from tempdir to fav folder
-    #Get-ChildItem -Path $TempDirName
     Write-Host $TempFileName
-    copy-item -Path $TempFileName -Destination $FavoritesFolder -Force:$true #-ErrorAction SilentlyContinue -Container #| Out-Null
-    #Remove-Item -Path $TempDirName -Recurse -Force
-    #Remove-Item -Path $TempFileName -Force
-
+    copy-item -Path $TempFileName -Destination $FavoritesFolder -Force:$true -ErrorAction SilentlyContinue -Container | Out-Null
+    Remove-Item -Path $TempFileName -Force
     Write-Host "Done" -ForegroundColor Green
 }
 
