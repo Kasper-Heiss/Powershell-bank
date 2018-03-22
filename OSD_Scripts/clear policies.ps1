@@ -42,7 +42,7 @@
     #>
 
     $Folder = ("HKLM:\SOFTWARE\Policies\")
-    #Write-Host $Folder
+
     #Test-Path -Path $Folder 
     Write-Host "starting to delete predefined machine policies"
     reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft" /f
