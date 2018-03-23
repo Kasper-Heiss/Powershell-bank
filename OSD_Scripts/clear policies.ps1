@@ -21,4 +21,6 @@
     #Write-Host "starting to delete machine Policies"
     (Get-ChildItem $Folder).PSPath | foreach { if($_){
             write-host "Deleting " $_
-            Remove-Item $_ -Force -Recurse} }
+            Remove-Item $_ -Force -Recurse   
+            } }
+Exit 0
