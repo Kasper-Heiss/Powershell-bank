@@ -93,7 +93,6 @@ Function SaveFavoriteFiles() {
 Function SaveChromeFavoriteFiles() {
 
     Write-Host "Gather ChromeFavorites ... " -ForegroundColor Green -NoNewline
-
     $FavNode = AddElement -Name "ChromeFavorites" -rootNode $Root
 
     Add-Type -Assembly "System.IO.Compression.FileSystem"
@@ -106,15 +105,11 @@ Function SaveChromeFavoriteFiles() {
         Remove-Item $TempFileName 
     }
 
-    $test = Get-Content -Path $FavoritesFolder
-     
-   #[System.io.compression.zipfile]::CreateFromDirectory($FavoritesFolder, $TempFileName)
-
     $content = [System.IO.File]::ReadAllBytes($FavoritesFolder)
 
     $contentEncoded = [System.Convert]::ToBase64String($content)
 
-    AddCData -Name "Favorites" -Value $contentEncoded -rootNode $FavNode 
+    AddCData -Name "Favorites" -Value $contentEncoded -rootNode $FavNode  | Out-Null
 
     Write-Host "Done" -ForegroundColor Green
 }

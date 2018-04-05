@@ -77,7 +77,7 @@ Function RestoreFavoriteFiles() {
 }
 
 Function RestoreChromeFavoriteFiles() {
-    Write-Host "Restore ChromeFavorites ... " -NoNewline -ForegroundColor Green
+    Write-Host "Restore Chrome Favorites ... " -NoNewline -ForegroundColor Green
 
     $FavoritesFolder = $env:LOCALAPPDATA + "\Google\Chrome\User Data\Default\Bookmarks"
 
@@ -94,7 +94,6 @@ Function RestoreChromeFavoriteFiles() {
     [System.IO.File]::WriteAllBytes($TempFileName, $Bytes)
 
     # Copy items from tempdir to fav folder
-    Write-Host $TempFileName
     copy-item -Path $TempFileName -Destination $FavoritesFolder -Force:$true -ErrorAction SilentlyContinue -Container | Out-Null
     Remove-Item -Path $TempFileName -Force
     Write-Host "Done" -ForegroundColor Green
@@ -206,7 +205,7 @@ if (ReadSettings) {
 
     # Default to restore all settings
     $RestoreAll = $true
-    RestoreChromeFavoriteFiles
+    
     # If any switch is specified, do not restore all
     Foreach ($param in $PSBoundParameters.GetEnumerator()) {
         If ($param.Value -eq $true) {
@@ -215,13 +214,13 @@ if (ReadSettings) {
     }
     
     
-    <#if ($RestoreAll -or $NetworkDrives ) { RestoreNetworkDrives }
+    if ($RestoreAll -or $NetworkDrives ) { RestoreNetworkDrives }
     if ($RestoreAll -or $NetworkPrinters ) { RestoreNetworkPrinters }
-    if ($RestoreAll -or $Favorites) { RestoreFavoriteFiles }
+    if ($RestoreAll -or $Favorites) {   RestoreFavoriteFiles 
+                                        RestoreChromeFavoriteFiles}
     if ($RestoreAll -or $OutlookSignatures ) { RestoreOutlookSignatures }
     if ($RestoreAll -or $OfficeLanguageSettings ) { RestoreOfficeLanguageSettings }
-    if ($RestoreAll -or $WindowsSettings ) { RestoreWindowsSettings }#>
+    if ($RestoreAll -or $WindowsSettings ) { RestoreWindowsSettings }
 } else{
     Write-Host "No matching settings where found" -ForegroundColor Red
 }
-#>
